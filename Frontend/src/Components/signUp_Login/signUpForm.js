@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useState,useEffect,useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { authActions } from "../../store/authSlice";
 import styles from "./signUpForm.module.css";
+import style2 from './signUpStep2.module.css'
 import axios from "axios";
+import images from "../../assets/images";
 
 const goalOptions = [
   "Centralize my emails",
@@ -22,6 +24,35 @@ const SignUpForm = () => {
   const [addressPlaceholder, setAddressPlaceholder] = useState("Enter Your Address");
   const [isDomainValidated, setIsDomainValidated] = useState(false);
   const [domainValidationError, setDomainValidationError] = useState("");
+
+
+
+const boardRef = useRef(null);
+const lightRef = useRef(null);
+const robotRef = useRef(null);
+const overlayRef = useRef(null);
+
+useEffect(() => {
+  if (boardRef.current) {
+    boardRef.current.classList.add(styles.animateBoard);
+  }
+
+  setTimeout(() => {
+    if (lightRef.current) {
+      lightRef.current.classList.add(styles.animateLight);
+    }
+  }, 3200);
+
+  setTimeout(() => {
+    if (robotRef.current) {
+      robotRef.current.classList.add(styles.animateRobot);
+    }
+    if (overlayRef.current) {
+      overlayRef.current.classList.add(styles.dimmed);
+    }
+  }, 4600);
+}, []);
+
 
   const handleSelectOption = (event) => {
     setEmailPlaceholder(`Enter Your ${event.target.value} mail`);
@@ -91,24 +122,34 @@ const SignUpForm = () => {
     }
   };
 
+
+    const activeStyles = step1Complete ? style2 : styles;
+
   return (
-    <div className={styles.form_main_div}>
-      <div className={styles.form_imgdiv}>
-        {/* <img src={formimg} alt="form image" className={styles.formimg} /> */}
+    <div className={activeStyles.form_main_div}>
+      <div className={`${activeStyles.form_imgdiv} ${activeStyles.animatescene}`}>
+        <img src={images.lightanimate} alt="Light" className={activeStyles.lighting} ref={lightRef} />
+        <img src={images.boardanimate} alt="Board" className={activeStyles.board} ref={boardRef} />
+        <img src={images.robotanimate} alt="Robot" className={activeStyles.robot} ref={robotRef} />
       </div>
-      <div className={styles.container}>
-        <h2>{step1Complete ? "Some details about your company" : "Open up your account now"}</h2>
+ 
+        
+     
+      <div className={activeStyles.container}>
+        <h2 className={activeStyles.signupHeading}>
+          {step1Complete ? "Some details about your company" : "Open up your account now"}
+        </h2>
 
         {!step1Complete && (
-          <p className={styles.subtext}>
-            Already signed up? <a href="#" className={styles.loginLink}>Login</a>
+          <p className={activeStyles.subtext}>
+            Already signed up? <a href="/login" className={activeStyles.loginLink}>Login</a>
           </p>
         )}
 
-        <form className={styles.form}>
+        <form className={activeStyles.form}>
           {!step1Complete && (
             <>
-              <div className={styles.formGroup}>
+              <div className={activeStyles.formGroup}>
                 <label htmlFor="forUse">For Use</label>
                 <select id="forUse" name="forUse" onChange={handleSelectOption}>
                   <option value="company">For Company</option>
@@ -116,7 +157,7 @@ const SignUpForm = () => {
                 </select>
               </div>
 
-              <div className={styles.formGroup}>
+              <div className={activeStyles.formGroup}>
                 <label htmlFor="firstName">First Name</label>
                 <input
                   type="text"
@@ -125,13 +166,13 @@ const SignUpForm = () => {
                   placeholder="Enter Your First Name"
                   value={formData.firstName}
                   onChange={handleChange}
-                  className={error.firstName ? styles.errorInput : ""}
+                  className={error.firstName ? activeStyles.errorInput : ""}
                   required
                 />
-                {error.firstName && <p className={styles.error}>{error.firstName}</p>}
+                {error.firstName && <p className={activeStyles.error}>{error.firstName}</p>}
               </div>
 
-              <div className={styles.formGroup}>
+              <div className={activeStyles.formGroup}>
                 <label htmlFor="lastName">Last Name</label>
                 <input
                   type="text"
@@ -140,11 +181,11 @@ const SignUpForm = () => {
                   placeholder="Enter Your Last Name"
                   value={formData.lastName}
                   onChange={handleChange}
-                  className={error.lastName ? styles.errorInput : ""}
+                  className={error.lastName ? activeStyles.errorInput : ""}
                 />
               </div>
 
-              <div className={styles.formGroup}>
+              <div className={activeStyles.formGroup}>
                 <label htmlFor="email">Email Address</label>
                 <input
                   type="email"
@@ -153,13 +194,13 @@ const SignUpForm = () => {
                   placeholder={emailPlaceholder}
                   value={formData.email}
                   onChange={handleChange}
-                  className={error.email ? styles.errorInput : ""}
+                  className={error.email ? activeStyles.errorInput : ""}
                   required
                 />
-                {error.email && <p className={styles.error}>{error.email}</p>}
+                {error.email && <p className={activeStyles.error}>{error.email}</p>}
               </div>
 
-              <div className={styles.formGroup}>
+              <div className={activeStyles.formGroup}>
                 <label htmlFor="mobileNo">Contact Number</label>
                 <input
                   type="tel"
@@ -168,13 +209,13 @@ const SignUpForm = () => {
                   placeholder="Enter Your Contact Number"
                   value={formData.mobileNo}
                   onChange={handleChange}
-                  className={error.mobileNo ? styles.errorInput : ""}
+                  className={error.mobileNo ? activeStyles.errorInput : ""}
                   required
                 />
-                {error.mobileNo && <p className={styles.error}>{error.mobileNo}</p>}
+                {error.mobileNo && <p className={activeStyles.error}>{error.mobileNo}</p>}
               </div>
 
-              <div className={styles.formGroup}>
+              <div className={activeStyles.formGroup}>
                 <label htmlFor="password">Password</label>
                 <input
                   type="password"
@@ -183,13 +224,13 @@ const SignUpForm = () => {
                   placeholder="Enter Your Password"
                   value={formData.password}
                   onChange={handleChange}
-                  className={error.password ? styles.errorInput : ""}
+                  className={error.password ? activeStyles.errorInput : ""}
                   required
                 />
-                {error.password && <p className={styles.error}>{error.password}</p>}
+                {error.password && <p className={activeStyles.error}>{error.password}</p>}
               </div>
 
-              <div className={styles.formGroup}>
+              <div className={activeStyles.formGroup}>
                 <label htmlFor="confirmPassword">Confirm Password</label>
                 <input
                   type="password"
@@ -198,13 +239,13 @@ const SignUpForm = () => {
                   placeholder="Re-enter Your Password"
                   value={formData.confirmPassword}
                   onChange={handleChange}
-                  className={error.confirmPassword ? styles.errorInput : ""}
+                  className={error.confirmPassword ? activeStyles.errorInput : ""}
                   required
                 />
-                {error.confirmPassword && <p className={styles.error}>{error.confirmPassword}</p>}
+                {error.confirmPassword && <p className={activeStyles.error}>{error.confirmPassword}</p>}
               </div>
 
-              <div className={styles.formGroup}>
+              <div className={activeStyles.formGroup}>
                 <label htmlFor="address">Company Address</label>
                 <input
                   type="text"
@@ -213,13 +254,13 @@ const SignUpForm = () => {
                   placeholder={addressPlaceholder}
                   value={formData.address}
                   onChange={handleChange}
-                  className={error.address ? styles.errorInput : ""}
+                  className={error.address ? activeStyles.errorInput : ""}
                   required
                 />
-                {error.address && <p className={styles.error}>{error.address}</p>}
+                {error.address && <p className={activeStyles.error}>{error.address}</p>}
               </div>
 
-              <button type="button" onClick={handleStep1Submit} className={styles.submitButton}>
+              <button type="button" onClick={handleStep1Submit} className={activeStyles.submitButton}>
                 Register
               </button>
             </>
@@ -227,7 +268,7 @@ const SignUpForm = () => {
 
           {step1Complete && (
             <>
-              <div className={styles.formGroup}>
+              <div className={activeStyles.formGroup}>
                 <label htmlFor="companyName">Company Name</label>
                 <input
                   type="text"
@@ -236,15 +277,15 @@ const SignUpForm = () => {
                   placeholder="Enter Your Company Name"
                   value={formData.companyName}
                   onChange={handleChange}
-                  className={error.companyName ? styles.errorInput : ""}
+                  className={error.companyName ? activeStyles.errorInput : ""}
                   required
                 />
-                {error.companyName && <p className={styles.error}>{error.companyName}</p>}
+                {error.companyName && <p className={activeStyles.error}>{error.companyName}</p>}
               </div>
 
-              <div className={styles.formGroup}>
+              <div className={activeStyles.formGroup}>
                 <label htmlFor="website">Website Domain</label>
-                <div className={styles.inputWithButton}>
+                <div className={activeStyles.inputWithButton}>
                   <input
                     type="text"
                     id="website"
@@ -252,29 +293,29 @@ const SignUpForm = () => {
                     placeholder="www.acme.com"
                     value={formData.website}
                     onChange={handleChange}
-                    className={error.website ? styles.errorInput : ""}
+                    className={error.website ? activeStyles.errorInput : ""}
                     required
                   />
                   <button
                     type="button"
-                    className={styles.validateButton}
+                    className={activeStyles.validateButton}
                     onClick={() => validateDomain(formData.website)}
                   >
                     Validate
                   </button>
                 </div>
-                {domainValidationError && <p className={styles.error}>{domainValidationError}</p>}
-                {error.website && <p className={styles.error}>{error.website}</p>}
+                {domainValidationError && <p className={activeStyles.error}>{domainValidationError}</p>}
+                {error.website && <p className={activeStyles.error}>{error.website}</p>}
               </div>
 
-              <div className={styles.formGroup}>
+              <div className={activeStyles.formGroup}>
                 <label htmlFor="goal">Goal</label>
                 <select
                   id="goal"
                   name="goal"
                   value={formData.goal}
                   onChange={handleChange}
-                  className={error.goal ? styles.errorInput : ""}
+                  className={error.goal ? activeStyles.errorInput : ""}
                   required
                 >
                   <option value="">-- Select your goal --</option>
@@ -284,16 +325,16 @@ const SignUpForm = () => {
                     </option>
                   ))}
                 </select>
-                {error.goal && <p className={styles.error}>{error.goal}</p>}
+                {error.goal && <p className={activeStyles.error}>{error.goal}</p>}
               </div>
 
-              <button type="submit" onClick={handleStep2Submit} className={styles.submitButton}>
+              <button type="submit" onClick={handleStep2Submit} className={activeStyles.submitButton}>
                 Discover My Dashboard
               </button>
             </>
           )}
 
-          {isAuthenticated && <p className={styles.success}>Successfully Signed Up!</p>}
+          {isAuthenticated && <p className={activeStyles.success}>Successfully Signed Up!</p>}
         </form>
       </div>
     </div>

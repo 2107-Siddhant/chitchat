@@ -42,8 +42,13 @@ import pricingFourthSection1 from './pricing/excellent1.png'
 import pricingFourthSection2 from './pricing/excellent2.png'
 import pricingFourthSection3 from './pricing/excellent3.png'
 
-// form
+// forms
 import signupimg from './form/signupform.jpg'
+import animatecircle from './form/circle2.png'
+import boardanimate  from './form/boardanimate.svg'
+import lightanimate from './form/light-animate.svg'
+import robotanimate from './form/robotanimate.svg'
+import formbg from './form/login-bg.jpg'
 
  
 
@@ -95,8 +100,13 @@ const images={
     // cardimg,card2,card3,
     // industry1, industry2,industry3,industry4,
 
-    // form
+  // form 
     signupimg,
+    animatecircle,
+    robotanimate,
+    lightanimate,
+    boardanimate,
+    formbg,
 
     // footer
     footerimg,

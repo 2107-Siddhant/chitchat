@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect,useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { loginActions } from "../../../store/loginSlice";
 import styles from './ForgotPasswordForm.module.css';
 import axios from "axios";
+import images from '../../../assets/images'
 
 const ForgotPasswordForm = () => {
   const dispatch = useDispatch();
@@ -16,6 +17,34 @@ const ForgotPasswordForm = () => {
   });
 
   const [message, setMessage] = useState("");
+
+  
+  const boardRef = useRef(null);
+  const lightRef = useRef(null);
+  const robotRef = useRef(null);
+  const overlayRef = useRef(null);
+  
+  useEffect(() => {
+  if (boardRef.current) {
+    boardRef.current.classList.add(styles.animateBoard);
+  }
+
+  setTimeout(() => {
+    if (lightRef.current) {
+      lightRef.current.classList.add(styles.animateLight);
+    }
+  }, 3200);
+
+  setTimeout(() => {
+    if (robotRef.current) {
+      robotRef.current.classList.add(styles.animateRobot);
+    }
+    if (overlayRef.current) {
+      overlayRef.current.classList.add(styles.dimmed);
+    }
+  }, 4600);
+}, []);
+  
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -52,6 +81,8 @@ const ForgotPasswordForm = () => {
       setMessage("OTP is required.");
       return;
     }
+
+    
 
     try {
       const response = await axios.post("http://localhost:5000/api/otp/verify-otp", {
@@ -93,11 +124,21 @@ const ForgotPasswordForm = () => {
 
   return (
     <div className={styles.form_main_div}>
-      <div className={styles.container}>
-        <h2>Forgot Password</h2>
-        <form onSubmit={handleSubmit}>
+       {/* Left Side image */}
+   
+<div className={`${styles.form_imgdiv} ${styles.animatescene}`}>
+        {/* <div ref={overlayRef} className={styles.darkOverlay}></div> */}
+        <img src={images.lightanimate} alt="Light" className={styles.lighting} ref={lightRef} />
+        <img src={images.boardanimate} alt="Board" className={styles.board} ref={boardRef} />
+        <img src={images.robotanimate} alt="Robot" className={styles.robot} ref={robotRef} />
+      </div>
 
-          <div className={styles.formGroup}>
+{/* right section forgot password form */}
+      <div className={styles.container}>
+        <h2 className={styles.forgotheading}>Forgot Password</h2>
+        <form onSubmit={handleSubmit} className={styles.form}>
+
+          <div className={styles.formGroup} >
             <label htmlFor="email">Registered Email</label>
             <input
               type="email"
@@ -136,7 +177,7 @@ const ForgotPasswordForm = () => {
           {forgotSuccessMessage && <p className={styles.success}>{forgotSuccessMessage}</p>}
 
           <p className={styles.forgotPassword}>
-            <Link to="/login" className={styles.a}>Back to Login</Link>
+            <a href="/login" className={styles.a}>Back to Login</a>
           </p>
 
         </form>

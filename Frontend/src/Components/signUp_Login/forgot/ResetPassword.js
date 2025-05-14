@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect,useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { loginActions } from '../../../store/loginSlice';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios'; 
 import styles from './ResetPassword.module.css';
+import images from '../../../assets/images';
 
 const ResetPassword = () => {
   const dispatch = useDispatch();
@@ -13,6 +14,33 @@ const ResetPassword = () => {
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [resetSuccess, setResetSuccess] = useState(false);
+
+  
+    const boardRef = useRef(null);
+    const lightRef = useRef(null);
+    const robotRef = useRef(null);
+    const overlayRef = useRef(null);
+    
+    useEffect(() => {
+  if (boardRef.current) {
+    boardRef.current.classList.add(styles.animateBoard);
+  }
+
+  setTimeout(() => {
+    if (lightRef.current) {
+      lightRef.current.classList.add(styles.animateLight);
+    }
+  }, 3200);
+
+  setTimeout(() => {
+    if (robotRef.current) {
+      robotRef.current.classList.add(styles.animateRobot);
+    }
+    if (overlayRef.current) {
+      overlayRef.current.classList.add(styles.dimmed);
+    }
+  }, 4600);
+}, []);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -72,10 +100,22 @@ const ResetPassword = () => {
   };
 
   return (
-    <div className={styles.container}>
-      <form className={styles.form} onSubmit={handleResetPassword}>
-        <h2 className={styles.heading}>Reset Password</h2>
+    <div className={styles.form_main_div}>
+             {/* Left Side image */}
+   
 
+             <div className={`${styles.form_imgdiv} ${styles.animatescene}`}>
+        {/* <div ref={overlayRef} className={styles.darkOverlay}></div> */}
+        <img src={images.lightanimate} alt="Light" className={styles.lighting} ref={lightRef} />
+        <img src={images.boardanimate} alt="Board" className={styles.board} ref={boardRef} />
+        <img src={images.robotanimate} alt="Robot" className={styles.robot} ref={robotRef} />
+      </div>
+
+    <div className={styles.container}>
+    <h2 className={styles.resetheading}>Reset Password</h2>
+
+      <form className={styles.form} onSubmit={handleResetPassword}>
+       
         <div className={styles.formGroup}>
           <label htmlFor='reset-email'>Email</label>
           <input
@@ -124,6 +164,7 @@ const ResetPassword = () => {
           </div>
         )}
       </form>
+    </div>
     </div>
   );
 };
