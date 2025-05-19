@@ -1,16 +1,8 @@
 import { Route, Routes } from "react-router";
-import SignUpForm from "./Components/signUp_Login/signUpForm";
-import LoginForm from "./Components/signUp_Login/LoginForm";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import ForgotPasswordForm from "./Components/signUp_Login/forgot/ForgotPasswordForm";
-import ResetPassword from "./Components/signUp_Login/forgot/ResetPassword";
-import Main from "./Components/main-container/Main"
-import Pricing from './Components/Pricing/Pricing'
-import Integrationnextsection from './Components/integration/Integrationnextsection'
-import Apphero from "./Components/apps/Apphero";
-import Help from './Components/help/Help'
-import MainDashboard from './Components/Dashboard/MainDashboard'
+import { routes } from "./routing/routing";
+
 
 function App() {
   const [data, setData] = useState("");
@@ -29,22 +21,12 @@ function App() {
   return (
     <div className="App">
       {data}
-      <Routes>
-        <Route path="/signup" element={<SignUpForm />} />
-        <Route path='/login' element={<LoginForm/>} />
-        <Route path="/forgotpassword" element={<ForgotPasswordForm/>} /> 
-        <Route path="/resetpassword" element={<ResetPassword/>} /> 
-        <Route path='/inbox' element={<MainDashboard/>} />
-        {/* UI path */}
-        <Route path='/' element={<Main/>}></Route>
-        <Route path='/pricing' element={<Pricing/>}></Route>
-        <Route path='/integration' element={<Integrationnextsection/>}></Route>  
-        <Route path='/App' element={<Apphero/>}></Route>  
-        {/* <Route path='/help' element={<Help/>}></Route> */}
+     
 
-        {/* further menu routing */}
-
-        {/* <Route path='/features/Ai Chatbot' element={</>}></Route> */}
+       <Routes>
+        {routes.map((route,index)=>(
+          <Route key={index} path={route.path} element={route.element} />
+        ))}
       </Routes>
     </div>
   );
