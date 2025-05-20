@@ -5,6 +5,10 @@ import triangle from './triangle.png'
 import robot from './robot.png'
 import circle2 from './circle2.png'
 import comment from './home/commentlogo.png'
+
+
+// head 
+import headerImg from './home/headerImg.jpg'
 // footer
 import footerimg  from './footer/footer-main.png'
 import cornerImage from "./home/cardCornerImage.png";
@@ -73,6 +77,7 @@ const images={
     circle2,
     comment,
     cornerImage,
+    headerImg,
 
     // pricing
     pricingImg,
