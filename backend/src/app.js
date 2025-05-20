@@ -8,6 +8,9 @@ const chatRoutes = require('./routes/chatRoutes'); // Import Routes
 const domainRoutes = require('./routes/domainRoutes'); // Import Routes
 const planRoutes = require("./routes/PlanRoutes"); // import Routes
 const errorHandler = require('./middleware/errorMiddleware');
+const visitorRoutes = require("./routes/visitorRoutes");
+
+
 const app = express();
 
 // Middleware
@@ -24,7 +27,7 @@ app.use('/api/chat', chatRoutes); // chat routes
 app.use('/api/domain', domainRoutes); // websitedomain route validator
 app.use('/api/otp', otpRoutes); // otp routing
 app.use("/api/plans", planRoutes); // plan routes
-
+app.use("/api/visitor", visitorRoutes); // visitor routes
 
 // Handle unknown routes
 app.use((req, res, next) => {
