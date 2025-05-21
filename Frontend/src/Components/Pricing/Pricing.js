@@ -1,98 +1,119 @@
-import React from "react";
+import React,{useState,useEffect} from "react";
 import styles from "./Pricing.module.css";
 import NavBar from "../head/Navbar";
 import images from "../../assets/images";
 import Footer from "../footer/Footer";
+import axios from "axios";
 
-const pricingPlans = [
-  {
-    name: "Basic",
-    price: "Free",
-    features: [
-      "2 seats included",
-      "Unlimited chat history",
-      "Livechat",
-      "Mobile apps",
-      "Basic integrations",
-    ],
-    buttonText: "Get Started",
-    isPopular: false,
-  },
-  {
-    name: "Pro",
-    price: "$25",
-    period: "/ month",
-    features: [
-      "4 seats included",
-      "Unlimited chat history",
-      "Livechat + Email",
-      "Advanced integrations",
-      "Shared inbox",
-    ],
-    buttonText: "Try for 14 days",
-    isPopular: true,
-  },
-  {
-    name: "Unlimited",
-    price: "$95",
-    period: "/ month",
-    features: [
-      "Unlimited seats",
-      "Unlimited chat history",
-      "Livechat + Email + More",
-      "Premium integrations",
-      "Advanced analytics",
-    ],
-    buttonText: "Try for 14 days",
-    isPopular: false,
-  },
-];
+
+
+// const pricingPlans = [
+//   {
+//     name: "Basic",
+//     price: "Free",
+//     features: [
+//       "2 seats included",
+//       "Unlimited chat history",
+//       "Livechat",
+//       "Mobile apps",
+//       "Basic integrations",
+//     ],
+//     buttonText: "Get Started",
+//     isPopular: false,
+//   },
+//   {
+//     name: "Pro",
+//     price: "$25",
+//     period: "/ month",
+//     features: [
+//       "4 seats included",
+//       "Unlimited chat history",
+//       "Livechat + Email",
+//       "Advanced integrations",
+//       "Shared inbox",
+//     ],
+//     buttonText: "Try for 14 days",
+//     isPopular: true,
+//   },
+//   {
+//     name: "Unlimited",
+//     price: "$95",
+//     period: "/ month",
+//     features: [
+//       "Unlimited seats",
+//       "Unlimited chat history",
+//       "Livechat + Email + More",
+//       "Premium integrations",
+//       "Advanced analytics",
+//     ],
+//     buttonText: "Try for 14 days",
+//     isPopular: false,
+//   },
+// ];
+
+
+// /  all plans
+// /assign  user assign a plan 
+// /upgrade  to updgrade
+
 
 const Pricing = () => {
+
+   const [plans, setPlans] = useState([]);
+
+  useEffect(() => {
+  axios.get("http://localhost:5000/api/plans/")
+      .then(res => {
+      console.log(res.data);         
+      setPlans(res.data.plans);
+    })
+    .catch(err => console.error("Error fetching plans:", err));
+}, []);
   return (
    <>
 
    <NavBar/>
-   <section className={styles.pricingHeroSection}>
-      <div className={styles.pricingHeroContainer}>
-        <h1 className={styles.pricingHeroTitle}>Discover Our Pricing</h1>
-        <p className={styles.pricingHeroSubtitle}>
-          Find the perfect package for your business needs.
-        </p>
-      </div>
-    </section>
+    <section className={styles.pricingHeroSection}>
+        <div className={styles.pricingHeroContainer}>
+          <h1 className={styles.pricingHeroTitle}>Discover Our Pricing</h1>
+          <p className={styles.pricingHeroSubtitle}>
+            Find the perfect package for your business needs.
+          </p>
+        </div>
+      </section>
 
-   
-     <section className={styles.pricingSection}>
-      <div className={styles.pricingHeader}>
-        <h1>Pricing Plans</h1>
-        <p>
-          Each new account gets access to all Mediator features. Try it free for 14
-          days and see if it fits your needs!
-        </p>
-      </div>
-      <div className={styles.pricingContainer}>
-        {pricingPlans.map((plan, index) => (
-          <div
-            key={index}
-            className={styles.pricingCard} 
-          >
-            <h2>{plan.name}</h2>
-            <div className={styles.price}>
-              <span className={styles.amount}>{plan.price}</span>
-              <span className={styles.period}>{plan.period}</span>
-             
+      <section className={styles.pricingSection}>
+        <div className={styles.pricingHeader}>
+          <h1>Pricing Plans</h1>
+          <p>
+            Each new account gets access to all Mediator features. Try it free for 14
+            days and see if it fits your needs!
+          </p>
+        </div>
+        <div className={styles.pricingContainer}>
+          {plans.map((plan => (
+            <div key={plan._id} className={styles.pricingCard}>
+              <h2>{plan.name}</h2>
+              <div className={styles.price}>
+                <span className={styles.amount}>
+                  {plan.price === 0 ? "Free" : `$${plan.price}`}
+                </span>
+                <span className={styles.period}>
+                  {plan.price === 0 ? "" : "/ month"}
+                </span>
+              </div>
+              <ul className={styles.features}>
+                {plan.features.map((feature, id) => (
+                  <li key={id}>{feature}</li>
+                ))}
+              </ul>
+              <button className={styles.priceButton}>
+                {plan.trialDays === 0 ? "Get Started" : `Try for ${plan.trialDays} days`}
+              </button>
             </div>
-            <ul className={styles.features}>
-              {plan.features.map((feature, id) => (
-                <li key={id}>{feature}</li>
-              ))}
-            </ul>
-            <button className={styles.priceButton}>{plan.buttonText}</button>
-          </div>
-        ))}
-      </div>
-    </section>
+          )))}
+        </div>
+      </section>
 
     <section className={styles.excellentSection}>
       <div className={styles.excellentHeader}>

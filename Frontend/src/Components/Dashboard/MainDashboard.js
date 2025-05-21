@@ -1,57 +1,44 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import DashboardNav from './DashboardNav';
 import styles from './main-dashboard.module.css';
 import DashboardChats from './DashboardChats';
 import Dashboard_MessageView from './Dashboard_MessageView';
 
-const initialConversations = [
-  {
-    id: 1,
-    sender: 'ChatBot',
-    messages: [
-      { id: 1, text: 'Hello! 👋 Welcome to our chatbot.', sender: 'bot' },
-      { id: 2, text: 'How can I assist you today?', sender: 'bot' },
-    ],
-    date: new Date().toLocaleDateString(),
-  },
-  {
-    id: 2,
-    sender: 'ChatBot',
-    messages: [
-      { id: 1, text: 'Type your message', sender: 'bot' },
-    ],
-    date: new Date().toLocaleDateString(),
-  },
-];
-
-const MainDashboard = () => {
-  const [conversations, setConversations] = useState(initialConversations);
+const MainDashboard = ({ userId }) => {
+  const [conversations, setConversations] = useState([]);
   const [selectedConversationId, setSelectedConversationId] = useState(null);
 
-  const selectedConversation = conversations.find(c => c.id === selectedConversationId);
+  // Fetch messages from backend
+  useEffect(() => {
+    const fetchChat = async () => {
+      try {
+        const res = await fetch(`http://localhost:5000/api/chat/${userId}`);
+        const data = await res.json();
 
-  const handleAddMessage = (text) => {
-    if (!selectedConversation) return;
+        if (data && data.messages) {
+          const chatConversation = {
+            id: 1,
+            sender: 'ChatBot',
+            messages: data.messages.map((msg, index) => ({
+              id: index + 1,
+              text: msg.text,
+              sender: msg.Sender,
+              timestamp: msg.timestamp,
+            })),
+            date: new Date().toLocaleDateString(),
+          };
 
-    const newMessage = {
-      id: selectedConversation.messages.length + 1,
-      text,
-      sender: 'user',
+          setConversations([chatConversation]);
+        }
+      } catch (err) {
+        console.error('Error fetching messages:', err);
+      }
     };
 
+    fetchChat();
+  }, [userId]);
 
-    const updatedConversations = conversations.map(conv => {
-      if (conv.id === selectedConversationId) {
-        return {
-          ...conv,
-          messages: [...conv.messages, newMessage],
-        };
-      }
-      return conv;
-    });
-
-    setConversations(updatedConversations);
-  };
+  const selectedConversation = conversations.find(c => c.id === selectedConversationId);
 
   return (
     <div className={styles.mainDashboard}>
@@ -59,15 +46,15 @@ const MainDashboard = () => {
         <DashboardNav />
       </div>
       <div className={styles.dashChat}>
-        <DashboardChats 
-          conversations={conversations} 
-          onMessageClick={(conv) => setSelectedConversationId(conv.id)} 
+        <DashboardChats
+          conversations={conversations}
+          onMessageClick={(conv) => setSelectedConversationId(conv.id)}
         />
       </div>
       <div className={styles.dashMsgView}>
-        <Dashboard_MessageView 
-          message={selectedConversation} 
-          onSendMessage={handleAddMessage} 
+        <Dashboard_MessageView
+          message={selectedConversation}
+          onSendMessage={() => {}}
         />
       </div>
     </div>

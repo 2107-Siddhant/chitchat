@@ -3,6 +3,8 @@ import Main from "../Components/main-container/Main";
 import Pricing from "../Components/Pricing/Pricing";
 import Integrationnextsection from '../Components/integration/Integrationnextsection'
 import Apphero from "../Components/apps/Apphero";
+import Help from '../Components/help/Help'
+import HelpTopicArticles from "../Components/help/HelpTopicArticles";
 
 
 import SignUpForm from "../Components/signUp_Login/signUpForm";
@@ -19,7 +21,9 @@ export const routes=[
     { path:'/pricing',  element:<Pricing/> },
     { path:'/integration',  element:<Integrationnextsection/> },
     {path: '/App', element: <Apphero/>},
-    //  { path:'/help',  element:<Help/> },
+     { path:'/help',  element:<Help/> },
+      { path: "/help/:topicName", element:<HelpTopicArticles/>},
+
   
 
 
