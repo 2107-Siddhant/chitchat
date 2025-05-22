@@ -3,7 +3,7 @@
   bottom: 0;
   right: 0;
   width: 100%;
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: rgba(17, 17, 17, 0.9);
   z-index: 1000;
   transition: opacity 0.4s ease, transform 0.4s ease;
   display: flex;
@@ -31,11 +31,11 @@
 }
 
 .sidebar {
-  width: 95%;
+  width: 80%;
+  margin: auto;
   padding: 2rem;
   display: flex;
-  flex-direction: row;
-  position: relative;
+  gap: 1rem;
   border-radius: 1rem;
   overflow: hidden;
 }
@@ -44,6 +44,8 @@
   display: flex;
   flex-wrap: wrap;
   width: 100%;
+  margin: auto;
+  width: 40%;
 }
 
 .leftMenu,
@@ -58,7 +60,10 @@
 }
 
 .middleMenu a {
-  color: red;
+  justify-content: space-evenly;
+}
+.middleMenu{
+  width: auto;
 }
 
 .leftMenu ul,
@@ -77,7 +82,7 @@
 
 .bgImage {
   width: 100%;
-  max-width: 40rem;
+  max-width: 28rem;
   height: auto;
   border-radius: 0.5rem;
   object-fit: cover;
@@ -106,7 +111,7 @@
 
 .closeBtn {
   position: absolute;
-  top: 1rem;
+  top: 4rem;
   right: 1rem;
   background: transparent;
   color: white;
@@ -114,11 +119,24 @@
   cursor: pointer;
   animation: slideBack 1s ease-in-out;
 }
+.menu:hover{
+  color: white;
+}
+.menu::after{
+     content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  width: 0%;
+  background-color: white;
+  transition: width 0.3s ease;
+}
 
 .furtherNavItem {
   position: relative;
-  display: inline-block;
-  padding: 10px 0;
+  display: block;
+  padding: 2px 0;
   color: white;
   text-decoration: none;
   font-weight: 500;
@@ -144,6 +162,12 @@
   width: 100%;
 }
 
+.link {
+  text-decoration: none;
+}
+.middleMenuList{
+  display: block;
+}
 @keyframes slideBack {
   0% {
     transform: translateX(-100%);
@@ -152,47 +176,51 @@
     transform: translateX(100%);
   }
 }
-
-@media(max-width: 900px){
-  .sidebar{
-    display: block;
-  }
-  .bgImage{
-    height: 15rem;
-    width: 30rem;
-  }
-  .leftMenu{
-    display: block;
-  }
-  .mainMenuUl{
-    display: flex;
-   
-    margin: auto;
-  }
-  .mainMenuUl li{
-     padding: 1rem;
-  }
-  .middleMenuList{
-    display: flex;
-    padding: 1rem;
-  }
-  .middleMenu{
-    display: flex;
-  }
+@media(max-width: 1100px){
+    .sidebar{
+      display: block;
+    }
+    .mainMenuUl{
+      display: flex;
+      gap: 1rem;
+    }
 }
 
 /* Responsive styles */
-@media (max-width: 768px) {
-  
+@media (max-width: 900px) {
+  .sidebar {
+    display: block;
+  }
+  .bgImage {
+    height: 15rem;
+    width: 30rem;
+  }
+  .leftMenu {
+    display: block;
+  }
+  .mainMenuUl {
+    display: flex;
+    margin: auto;
+  }
+  .middleMenuList {
+    display: flex;
+    padding: 1rem;
+  }
+  .middleMenu {
+    margin: auto;
+    display: block;
+    width: 100%;
+  }
+}
 
+@media (max-width: 768px) {
   .wholeMenu {
     flex-direction: column;
     width: 100%;
   }
-   .bgImage {
-      display: none;
-    }
-
+  .bgImage {
+    display: none;
+  }
   .leftMenu,
   .middleMenu,
   .mainMenu,
@@ -201,32 +229,25 @@
     justify-content: center;
     text-align: center;
   }
-  .mainMenu{
+  .mainMenu {
     margin: auto;
   }
-
   .leftMenu {
     gap: 0.5rem;
     justify-content: center;
   }
-
-  /* Hide image only on small phones */
-  
   .headerImgContainer {
     width: 100%;
     height: auto;
   }
-
   .rightContent {
     align-items: center;
     width: 100%;
   }
-
   .contactDetails {
     gap: 0.5rem;
     text-align: center;
   }
-
   .furtherMenu {
     width: 100%;
     padding: 1rem;
