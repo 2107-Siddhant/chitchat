@@ -4,7 +4,7 @@ import Navbar  from '../head/Navbar';
 import images from '../../assets/images';
 
 
-const App = () => {
+const Integration = () => {
   return (
     <div>
         <Navbar/>
@@ -126,4 +126,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default Integration;

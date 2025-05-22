@@ -54,7 +54,13 @@ import lightanimate from './form/light-animate.svg'
 import robotanimate from './form/robotanimate.svg'
 import formbg from './form/login-bg.jpg'
 
- 
+
+// widget images
+import widgetImg from './widgets/widgetImg.webp'
+import widgetImg2 from './widgets/widgetImg2.webp'
+import widgetImg3 from './widgets/widgetImg3.webp'
+import widgetImg4 from './widgets/widgetImg4.webp'
+
 
 const images={
 
@@ -68,6 +74,13 @@ const images={
     iphone,
     web,
     android,
+
+
+    // widget
+    widgetImg ,
+    widgetImg2,
+    widgetImg3,
+    widgetImg4,
     
     // hero-img //
     heroImage,
@@ -75,7 +88,7 @@ const images={
     triangle,
     robot,
     circle2,
-    comment,
+    comment,                  
     cornerImage,
     headerImg,
 
@@ -104,6 +117,7 @@ const images={
     // // main-next section
     // cardimg,card2,card3,
     // industry1, industry2,industry3,industry4,
+    
 
   // form 
     signupimg,

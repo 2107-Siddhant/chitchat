@@ -1,9 +1,12 @@
 
 import Main from "../Components/main-container/Main";
 import Pricing from "../Components/Pricing/Pricing";
-import Integrationnextsection from '../Components/integration/Integrationnextsection'
+import Integrationnextsection from '../Components/integration/Integration'
 import Apphero from "../Components/apps/Apphero";
 
+
+// further menu 
+import Widgets from '../Components/furtherMenu/Widgets'
 
 import SignUpForm from "../Components/signUp_Login/signUpForm";
 import LoginForm from "../Components/signUp_Login/LoginForm";
@@ -16,8 +19,8 @@ import ResetPassword from "../Components/signUp_Login/forgot/ResetPassword";
 
 export const routes=[
     {path:'/',  element:<Main/> },
-    { path:'/pricing',  element:<Pricing/> },
-    { path:'/integration',  element:<Integrationnextsection/> },
+    { path:'/Pricing',  element:<Pricing/> },
+    { path:'/Integration',  element:<Integrationnextsection/> },
     {path: '/App', element: <Apphero/>},
     //  { path:'/help',  element:<Help/> },
   
@@ -28,6 +31,5 @@ export const routes=[
     { path:'/inbox',  element:<MainDashboard/> },
     { path:'/forgotpassword',  element:<ForgotPasswordForm/> },
     { path:'/resetpassword',  element:<ResetPassword/> },
-
-    
+    { path : '/widget', element : <Widgets/>}
 ]

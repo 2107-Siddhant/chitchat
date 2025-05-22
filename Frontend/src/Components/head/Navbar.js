@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import styles from './Navbar.module.css';
 import FurhterNav from './FurtherNav';
-import { Link } from 'react-router';
 
 const Navbar = () => {
   const [showSidebar, setShowSidebar] = useState(false);
@@ -14,9 +13,7 @@ const Navbar = () => {
       <nav className={styles.navbar}>
         <div className={styles.left}>
           <div className={styles.hamburger} onClick={toggleSidebar} title="menu">
-            <div />
-            <div />
-            <div />
+            <div/>
           </div>
         
         </div>
@@ -28,8 +25,8 @@ const Navbar = () => {
         </div>
 
         <div className={styles.right}>
-          <Link to="/signup" ><button className={styles.headerBtn}>Sign Up</button></Link>
-         <Link to="/login" ><button className={styles.headerBtn}>Login</button></Link> 
+          <button className={styles.headerBtn}>Sign Up</button>
+          <button className={styles.headerBtn}>Login</button>
         </div>
 
       </nav>
