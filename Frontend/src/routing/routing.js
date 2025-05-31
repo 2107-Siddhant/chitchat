@@ -9,6 +9,7 @@ import HelpTopicArticles from "../Components/help/HelpTopicArticles";
 
 // further menu 
 import Widgets from '../Components/furtherMenu/Widgets'
+import KnowledgeBase from "../Components/furtherMenu/Knowledge/KnowledgeBase";
 
 import SignUpForm from "../Components/signUp_Login/signUpForm";
 import LoginForm from "../Components/signUp_Login/LoginForm";
@@ -27,7 +28,9 @@ export const routes=[
      { path:'/help',  element:<Help/> },
       { path: "/help/:topicName", element:<HelpTopicArticles/>},
 
-  
+  // further menu
+    { path : '/widget', element : <Widgets/>},
+    {path:'/knowledge', element:<KnowledgeBase/>},
 
 
     { path:'/signup',  element:<SignUpForm/> },
@@ -35,5 +38,4 @@ export const routes=[
     { path:'/inbox',  element:<MainDashboard/> },
     { path:'/forgotpassword',  element:<ForgotPasswordForm/> },
     { path:'/resetpassword',  element:<ResetPassword/> },
-    { path : '/widget', element : <Widgets/>}
 ]

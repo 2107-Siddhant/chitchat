@@ -61,6 +61,10 @@ import widgetImg2 from './widgets/widgetImg2.webp'
 import widgetImg3 from './widgets/widgetImg3.webp'
 import widgetImg4 from './widgets/widgetImg4.webp'
 
+// knowledge
+import knowledgeHeroImage from './furtherMenu/Knowledge/knowledge-hero.jpg'
+import testimonialCircle from './furtherMenu/Knowledge/testimonial-circle.png'
+import curiousimg from './furtherMenu/Knowledge/curious-img.png'
 
 const images={
 
@@ -81,6 +85,12 @@ const images={
     widgetImg2,
     widgetImg3,
     widgetImg4,
+
+
+    // knowledgebase
+    knowledgeHeroImage,
+    testimonialCircle,
+    curiousimg,
     
     // hero-img //
     heroImage,
