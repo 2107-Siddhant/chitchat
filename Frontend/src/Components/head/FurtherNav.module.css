@@ -9,8 +9,8 @@
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  border-top-left-radius: 100px;
-  border-top-right-radius: 100px;
+  border-top-left-radius: 60px;
+  border-top-right-radius: 60px;
   animation: slide 1s ease-in-out;
   flex-wrap: wrap;
 }
@@ -59,9 +59,7 @@
   gap: 1rem;
 }
 
-.middleMenu a {
-  justify-content: space-evenly;
-}
+
 .middleMenu{
   width: auto;
 }
@@ -70,13 +68,14 @@
 .middleMenu ul {
   list-style: none;
   padding: 0;
-  margin: 0;
+ /* margin: 2rem 0rem; */
+ /* margin-bottom: 1rem; */
 }
 
 .leftMenu li,
 .middleMenu li {
   color: #fff;
-  font-size: 1.2rem;
+  font-size: 1rem;
   cursor: pointer;
 }
 
@@ -142,6 +141,10 @@
   font-weight: 500;
   transition: color 0.3s ease;
 }
+.furtherMenuLink{
+  font-size: 1rem;
+  text-decoration: none;
+}
 
 .furtherNavItem:hover {
   color: white;
@@ -165,9 +168,7 @@
 .link {
   text-decoration: none;
 }
-.middleMenuList{
-  display: block;
-}
+
 @keyframes slideBack {
   0% {
     transform: translateX(-100%);
@@ -177,41 +178,161 @@
   }
 }
 @media(max-width: 1100px){
-    .sidebar{
-      display: block;
-    }
+  
     .mainMenuUl{
-      display: flex;
-      gap: 1rem;
+      gap: 2rem;
+      
+    }
+    .headerImgContainer{
+      margin: auto;
     }
 }
 
-/* Responsive styles */
-@media (max-width: 900px) {
-  .sidebar {
-    display: block;
+ .carouselContainer {
+  display: block;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  padding: 0.5rem;
+}
+
+.carouselBtn {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  z-index: 2;
+  display: none; 
+}
+
+.middleMenu {
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  flex: 1;
+}
+.middleMenuList {
+  gap: 1rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  white-space: nowrap;
+}
+.furtherMenuLink {
+  position: relative; 
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: 8px;
+  text-decoration: none;
+  color: #000;
+  white-space: nowrap;
+  overflow: hidden; 
+
+}
+
+.furtherMenuLink::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 1.4%;
+  height: 2px;
+  width: 0%;
+  background-color: white;
+  transition: width 0.3s ease-in-out;
+}
+
+.furtherMenuLink:hover::after {
+  width: 8rem;
+}
+.furtherMenuLink:hover::after {
+  width: 8rem;
+}
+.furtherMenuLink:active:after {
+  width: 8rem;
+}
+
+.furtherMenuLink {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: white;
+}
+
+.icon {
+  font-size: 1rem;
+}
+@media (min-width: 901px) {
+  .carouselContainer {
+    justify-content: center;
   }
-  .bgImage {
-    height: 15rem;
-    width: 30rem;
-  }
-  .leftMenu {
-    display: block;
-  }
-  .mainMenuUl {
-    display: flex;
-    margin: auto;
-  }
+
   .middleMenuList {
-    display: flex;
-    padding: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
   }
-  .middleMenu {
-    margin: auto;
-    display: block;
-    width: 100%;
+
+  .carouselBtn {
+    display: none;
   }
 }
+
+ @media (max-width: 900px) {
+  .bgImage {
+    height: 10rem;
+    width: 100%;
+    max-width: 20rem;
+    margin: 0 auto;
+  }
+
+  .sidebar,
+  .leftMenu {
+    width: 100%;
+  }
+  
+
+  .middleMenu {
+    width: 100%;
+    -webkit-overflow-scrolling: touch;
+     scrollbar-color: #888 #f1f1f1;
+  }
+
+  .middleMenuList {
+    width: 100%;
+  }
+
+  .mainMenuUl {
+    
+    align-items: center;
+    flex-wrap: wrap wrap items on smaller screens;
+    width: 100%;
+    margin: auto;
+    padding: 0;
+  }
+
+  .middleMenu {
+    width: 100%;
+    margin: 0 auto;
+    display: block;
+  }
+
+  .middleMenuList {
+    
+    padding: 1rem;
+    width: 100%;
+  }
+
+  .furtherNavItem {
+    
+    align-items: center;
+    width:10rem;
+    padding: 1rem;
+    /* display: flex; */
+    text-align: center;
+  }
+}
+
+
 
 @media (max-width: 768px) {
   .wholeMenu {
@@ -225,7 +346,6 @@
   .middleMenu,
   .mainMenu,
   .furtherMenu {
-    width: 50%;
     justify-content: center;
     text-align: center;
   }
@@ -233,6 +353,7 @@
     margin: auto;
   }
   .leftMenu {
+    display: block;
     gap: 0.5rem;
     justify-content: center;
   }
@@ -245,12 +366,87 @@
     width: 100%;
   }
   .contactDetails {
-    gap: 0.5rem;
-    text-align: center;
+    display: none;
   }
   .furtherMenu {
     width: 100%;
     padding: 1rem;
     box-sizing: border-box;
   }
+  .middleMenuList{
+    display: flex;
+  }
+  .mainMenuUl{
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    display: flex;
+  }
+  .mainMenuUl{
+    justify-content: center;
+  }
+  .sidebar{
+    padding: 0rem;
+    display: block;
+  }
+  
+  .contactDetails{
+    gap: 2rem;
+    justify-content: center;
+  }
+  .socialIcons{
+    gap: 2rem;
+  }
+  .closeBtn{
+    top: 1rem;
+    right: 4rem;
+  }
+}
+@media(max-width: 465px){
+  .leftMenu{
+    gap: 0.5rem;
+    font-size: 0.9rem;
+  }
+  .socialIcons{
+    font-size: 0.9rem;
+  }
+  .mainMenuUl{
+    padding: 1rem;
+    gap: 1rem;
+  }
+  .contactDetails{
+    gap: 1rem;
+  }
+  .furtherMenu{
+    padding: 0rem;
+  }
+  .carouselContainer{
+    padding: 1rem;
+  }
+
+  .closeBtn{
+    top: 2rem;
+    right: 1rem;
+  }
+  
+}
+@media(max-width: 566px){
+  .closeBtn{
+    top: 2rem;
+    right: 1rem;
+  }
+  .mainMenuUl{
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    gap: 0.8rem;
+  }
+  .middleMenuList{
+    margin-bottom: 2rem;
+  }
+}
+@media(max-width: 375px){
+  .closeBtn{
+    top: 1rem;
+    right: 2rem;
+  }
+
 }

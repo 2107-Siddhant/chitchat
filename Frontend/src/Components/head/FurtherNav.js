@@ -7,6 +7,7 @@ const FurtherNav = ({ onClose }) => {
   const [showMiddleMenu, setShowMiddleMenu] = useState(false);
   const [clicked, setClicked] = useState(false);
   const menuRef = useRef(null);
+  const carouselRef = useRef(null);
 
   // Handle clicks outside to close the sidebar
   useEffect(() => {
@@ -36,6 +37,43 @@ const FurtherNav = ({ onClose }) => {
     setClicked(newClicked);
     setShowMiddleMenu(newClicked);
   };
+useEffect(() => {
+  const carousel = carouselRef.current;
+  const prevBtn = document.querySelector(`.${styles.carouselBtn}.${styles.prev}`);
+  const nextBtn = document.querySelector(`.${styles.carouselBtn}.${styles.next}`);
+  const scrollAmount = 200;
+
+  const scrollLeft = () => {
+    carousel.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+  };
+  const scrollRight = () => {
+    carousel.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+  };
+
+  const updateButtonVisibility = () => {
+    const isMobile = window.innerWidth <= 768;
+    if (prevBtn && nextBtn) {
+      prevBtn.style.display = isMobile ? 'block' : 'none';
+      nextBtn.style.display = isMobile ? 'block' : 'none';
+    }
+  };
+
+  updateButtonVisibility(); // Set visibility on mount
+  window.addEventListener('resize', updateButtonVisibility);
+
+  if (prevBtn && nextBtn) {
+    prevBtn.addEventListener('click', scrollLeft);
+    nextBtn.addEventListener('click', scrollRight);
+  }
+
+  return () => {
+    window.removeEventListener('resize', updateButtonVisibility);
+    if (prevBtn && nextBtn) {
+      prevBtn.removeEventListener('click', scrollLeft);
+      nextBtn.removeEventListener('click', scrollRight);
+    }
+  };
+}, []);
 
   return (
     <div className={styles.overlay}>
@@ -58,19 +96,57 @@ const FurtherNav = ({ onClose }) => {
 
             <div className={styles.furtherMenu}>
               {showMiddleMenu && (
-                <div className={styles.middleMenu}>
-                  <ul className={styles.middleMenuList}>
-    <Link to="/widget"><a href="#" className={styles.furtherNavItem}><i className="fas fa-video icon"></i> Widget</a></Link>
-    <Link className={styles.link}><a href="#" className={styles.furtherNavItem}><i className="fas fa-robot icon"></i> AI Chatbot</a></Link>
-    <Link className={styles.link}><a href="#" className={styles.furtherNavItem}><i className="fas fa-database icon"></i> CRM</a></Link>
-    <Link className={styles.link}><a href="#" className={styles.furtherNavItem}><i className="fas fa-envelope icon"></i> Shared Inbox</a></Link>
-    <Link className={styles.link}><a href="#" className={styles.furtherNavItem}><i className="fas fa-globe icon"></i> AI</a></Link>
-    <Link className={styles.link}><a href="#" className={styles.furtherNavItem}><i className="fas fa-th-large icon"></i> Knowledge</a></Link>
-    <Link className={styles.link}><a href="#" className={styles.furtherNavItem}><i className="fas fa-ticket-alt icon"></i> Ticketing System</a></Link>
-    <Link className={styles.link}><a href="#" className={styles.furtherNavItem}><i className="fas fa-sync icon"></i> Status Page</a></Link>
-    <Link className={styles.link}><a href="#" className={styles.furtherNavItem}><i className="fas fa-code icon"></i> Chat SDK</a></Link>
-                  </ul>
-                </div>
+                <div className={styles.carouselContainer}>
+      <div className={styles.middleMenu} ref={carouselRef}>
+        <ul className={styles.middleMenuList}>
+          <li className={styles.menuItem}>
+            <Link to="/widget" className={styles.furtherMenuLink}>
+              <i className="icon fas fa-video"></i> Widget
+            </Link>
+          </li>
+          <li className={styles.menuItem}>
+            <Link to="#" className={styles.furtherMenuLink}>
+              <i className="icon fas fa-robot"></i> AI Chatbot
+            </Link>
+          </li>
+          <li className={styles.menuItem}>
+            <Link to="#" className={styles.furtherMenuLink}>
+              <i className="icon fas fa-database"></i> CRM
+            </Link>
+          </li>
+          <li className={styles.menuItem}>
+            <Link to="#" className={styles.furtherMenuLink}>
+              <i className="icon fas fa-envelope"></i> Shared Inbox
+            </Link>
+          </li>
+          <li className={styles.menuItem}>
+            <Link to="#" className={styles.furtherMenuLink}>
+              <i className="icon fas fa-globe"></i> AI
+            </Link>
+          </li>
+          <li className={styles.menuItem}>
+            <Link to="#" className={styles.furtherMenuLink}>
+              <i className="icon fas fa-th-large"></i> Knowledge
+            </Link>
+          </li>
+          <li className={styles.menuItem}>
+            <Link to="#" className={styles.furtherMenuLink}>
+              <i className="icon fas fa-ticket-alt"></i> Ticketing System
+            </Link>
+          </li>
+          <li className={styles.menuItem}>
+            <Link to="#" className={styles.furtherMenuLink}>
+              <i className="icon fas fa-sync"></i> Status Page
+            </Link>
+          </li>
+          <li className={styles.menuItem}>
+            <Link to="#" className={styles.furtherMenuLink}>
+              <i className="icon fas fa-code"></i> Chat SDK
+            </Link>
+          </li>
+        </ul>
+      </div>
+      </div>
               )}
             </div>
           </div>

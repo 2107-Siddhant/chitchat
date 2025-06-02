@@ -22,7 +22,7 @@ import mac from './app/mac.png'
 import iphone from './app/iphone.png'
 import web from './app/web.png'
 import android from './app/android.png'
-
+  
 
 // mediatorApp // 
 import gmail from './mediatorApps/gmail.png'
@@ -55,10 +55,20 @@ import formbg from './form/login-bg.jpg'
 
 
 // widget images
-import widgetImg from './widgets/widgetImg.webp'
-import widgetImg2 from './widgets/widgetImg2.webp'
-import widgetImg3 from './widgets/widgetImg3.webp'
-import widgetImg4 from './widgets/widgetImg4.webp'
+import widgetImg from './furtherMenu/widgets/widgetImg.webp'
+import widgetImg2 from './furtherMenu/widgets/widgetImg2.webp'
+import widgetImg3 from './furtherMenu/widgets/widgetImg3.webp'
+import widgetImg4 from './furtherMenu/widgets/widgetImg4.webp'
+import furtherMenuBackgroundImage from './furtherMenu/widgets/widget-hero.jpg'
+import webflow from './furtherMenu/widgets/webflow.jpg'
+import shopify from './furtherMenu/widgets/shopify.png'
+import wordPress from './furtherMenu/widgets/wordpress.webp' 
+import woocommerce from './furtherMenu/widgets/woocommerce.png'
+import adobe from './furtherMenu/widgets/adobe.png'
+import wix from './furtherMenu/widgets/wix.jpg'
+import tellegram from './furtherMenu/widgets/tellegram.png'
+import twiterApp from './furtherMenu/widgets/twiter.png'
+
 
 // knowledge
 import knowledgeHeroImage from './furtherMenu/Knowledge/knowledge-hero.jpg'
@@ -84,6 +94,7 @@ const images={
     widgetImg2,
     widgetImg3,
     widgetImg4,
+<<<<<<< HEAD
 
 
     // knowledgebase
@@ -91,6 +102,18 @@ const images={
     testimonialCircle,
     curiousimg,
     
+=======
+    furtherMenuBackgroundImage,  
+    shopify,
+    webflow,
+    wordPress,
+    adobe,
+    woocommerce,
+    wix,
+    tellegram,
+    twiterApp,
+      
+>>>>>>> c8071d5fa59e42bac49d15d34365202481cc0825
     // hero-img //
     heroImage,
     circle,
