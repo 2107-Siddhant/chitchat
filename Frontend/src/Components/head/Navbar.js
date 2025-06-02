@@ -13,6 +13,12 @@ const Navbar = () => {
       <nav className={styles.navbar}>
         <div className={styles.left}>
           <div className={styles.hamburger} onClick={toggleSidebar} title="menu">
+            <div className={styles.hamburger} onClick={toggleSidebar} title="menu">
+              <div className={styles.hamburger} onClick={toggleSidebar} title="menu">
+              </div>
+               <div className={styles.hamburger} onClick={toggleSidebar} title="menu">
+              </div>
+            </div>
             <div/>
           </div>
         

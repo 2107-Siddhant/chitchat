@@ -6,7 +6,7 @@ import Apphero from "../Components/apps/Apphero";
 
 
 // further menu 
-import Widgets from '../Components/furtherMenu/Widgets'
+import Widgets from '../Components/furtherMenu/widget/Widgets'
 
 import SignUpForm from "../Components/signUp_Login/signUpForm";
 import LoginForm from "../Components/signUp_Login/LoginForm";
