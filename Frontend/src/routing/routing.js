@@ -8,8 +8,12 @@ import HelpTopicArticles from "../Components/help/HelpTopicArticles";
 
 
 // further menu 
+<<<<<<< HEAD
 import Widgets from '../Components/furtherMenu/Widgets'
 import KnowledgeBase from "../Components/furtherMenu/Knowledge/KnowledgeBase";
+=======
+import Widgets from '../Components/furtherMenu/widget/Widgets'
+>>>>>>> c8071d5fa59e42bac49d15d34365202481cc0825
 
 import SignUpForm from "../Components/signUp_Login/signUpForm";
 import LoginForm from "../Components/signUp_Login/LoginForm";
