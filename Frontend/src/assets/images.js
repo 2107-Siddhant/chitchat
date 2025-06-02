@@ -39,7 +39,6 @@ import integrationImage2 from './integration/02.jpg'
 import integrationImage3 from './integration/03.jpg'
 import integrationHero from './integration/color-bg.png'
 
-
 // pricing 
 import pricingImg from './pricing/pricing-img.jpg'
 import pricingFourthSection1 from './pricing/excellent1.png'
